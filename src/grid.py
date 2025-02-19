@@ -1,14 +1,23 @@
+#####################################################################
+# Jan Berglund
+#
+# Exam
+#
+#####################################################################
+
+
 import random
 
 class Grid:
-    """Representerar spelplanen. Du kan ändra standardstorleken och tecknen för olika rutor. """
-    width = 36
-    height = 12
-    empty = "."  # Tecken för en tom ruta
-    wall = "■"   # Tecken för en ogenomtränglig vägg
+    """"Represents the game board grid setup.
+    It is OK to change the symbols for different squares."""
+    width = 37
+    height = 13
+    empty = "."  # Symbol for an empty square
+    wall = "■"   # Symbol for a (normally impenetrable) wall
 
     def __init__(self):
-        """Skapa ett objekt av klassen Grid"""
+        """Create an object of the class Grid"""
         # Spelplanen lagras i en lista av listor. Vi använder "list comprehension" för att sätta tecknet för "empty" på varje plats på spelplanen.
         self.data = [[self.empty for y in range(self.width)] for z in range(
             self.height)]

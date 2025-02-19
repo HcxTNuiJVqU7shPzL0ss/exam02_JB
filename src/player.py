@@ -1,3 +1,11 @@
+#####################################################################
+# Jan Berglund
+#
+# Exam
+#
+#####################################################################
+
+
 class Player:
     marker = "@"
 
@@ -5,7 +13,7 @@ class Player:
         self.pos_x = x
         self.pos_y = y
 
-    # Flyttar spelaren. "dx" och "dy" är skillnaden
+    # Move the player, "dx" and "dy" is the difference
     def move(self, dx, dy):
         """Flyttar spelaren.\n
         dx = horisontell förflyttning, från vänster till höger\n
@@ -14,7 +22,14 @@ class Player:
         self.pos_y += dy
 
     def can_move(self, x, y, grid):
-        return True
-        #TODO: returnera True om det inte står något i vägen
+        check_x = self.pos_x + x
+        check_y = self.pos_y + y
+        check_wall = grid.get(check_x , check_y)
 
+        if check_wall == grid.wall: # "■":
+            print("Not allowed to walk through walls!")
+            input("Press Enter to continue!")
+            return False
+        else:
+            return True
 
