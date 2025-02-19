@@ -24,7 +24,7 @@ g.make_extra_walls()
 pickups.randomize(g)
 
 
-# List of acceptable commands, not including q or x
+# List of acceptable commands, not including q, x, i
 player_commands = ["a", "s", "d", "w"]
 
 # List of exit commands
@@ -44,7 +44,8 @@ while not command.casefold() in exit_commands:
     if in_ok:
         print_status(g, score)
 
-    command = input("Use WASD to move, Q/X to quit (Enter after input): \n")
+    command = input("Use WASD to move, I for inventory, "
+                    "Q/X to quit, only one char (Enter after input): \n")
     if len(command) != 1:
         print("Please only type one character")
         in_ok = False
