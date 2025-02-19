@@ -47,7 +47,7 @@ while not command.casefold() in exit_commands:
     if command in player_commands:
         coords = handle_commands(command, player, g)
 
-        maybe_item = g.get(player.pos_x + 1, player.pos_y)
+        maybe_item = g.get(player.pos_x + coords[0], player.pos_y + coords[1])
         player.move(coords[0], coords[1])
 
         if isinstance(maybe_item, pickups.Item):
@@ -58,11 +58,17 @@ while not command.casefold() in exit_commands:
             g.clear(player.pos_x, player.pos_y)
             inventory.append(maybe_item.name)
         else:
+            # Do not subtract points if attempting to move through a wall
+            if coords[0] == 0 and coords[1] == 0:
+                continue
+
             if score > 0:
                 score -= 1
             else:
                 if neg_values:
                     score -= 1
+
+    # Handle inventory printout
     elif command == "i":
         if len(inventory) == 0:
             print("Inventory is empty!")
