@@ -63,6 +63,19 @@ class Grid:
             self.set(j, self.height - 1, self.wall)
 
 
+    def make_extra_walls(self):
+        """Create extra walls"""
+        y_coord_start = [3, 5] # Start at x = 3, y = 5
+        y_length = 4 # Make 4 wall segments
+        for n in range(y_length):
+            self.set(y_coord_start[0], y_coord_start[1] + n, self.wall)
+
+        x_coord_start = [17, 4]  # Start at x = 17, y = 4
+        x_length = 6  # Make 6 wall segments
+        for m in range(x_length):
+            self.set(x_coord_start[0] + m, x_coord_start[1], self.wall)
+
+
     # Används i filen pickups.py
     def get_random_x(self):
         """Slumpa en x-position på spelplanen"""

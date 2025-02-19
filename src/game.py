@@ -20,6 +20,7 @@ inventory = []                  # Empty inventory at start
 g = Grid()
 g.set_player(player)
 g.make_walls()
+g.make_extra_walls()
 pickups.randomize(g)
 
 
@@ -31,6 +32,7 @@ exit_commands = ["q", "x"]
 
 
 command = "a"
+in_ok = True
 
 
 # Check if to allow values below 0 when walking on lava
@@ -39,10 +41,17 @@ neg_values = lava_negative()
 
 # Loop until user/player inputs X or Q
 while not command.casefold() in exit_commands:
-    print_status(g, score)
+    if in_ok:
+        print_status(g, score)
 
     command = input("Use WASD to move, Q/X to quit (Enter after input): \n")
-    command = command.casefold()[:1]
+    if len(command) != 1:
+        print("Please only type one character")
+        in_ok = False
+        continue
+    else:
+        command = command.casefold()[:1]
+        in_ok = True
 
     if command in player_commands:
         coords = handle_commands(command, player, g)
