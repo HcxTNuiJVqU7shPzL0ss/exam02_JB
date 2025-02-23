@@ -73,6 +73,14 @@ while not command.casefold() in exit_commands:
                 else:
                     str_print = (f"You found a {maybe_item.name}, but you had no key.")
                     clear = False
+            # Trap
+            elif maybe_item.name == "trap":
+                str_print = (f"Oh no, it is a {maybe_item.name}!")
+                if score >= 10 or neg_values:
+                    score += maybe_item.value
+                else:
+                    score = 0
+                clear = False
             # Fruit / veggie
             elif maybe_item.value > 0:
                 score += maybe_item.value

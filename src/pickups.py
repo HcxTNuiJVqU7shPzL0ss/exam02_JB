@@ -27,8 +27,11 @@ keys = [Item("key", 0, "k")]
 # Used to randomize chest(s) on the grid
 chests = [Item("chest", 100, "c")]
 
+# Used to randomize one trap on the grid
+traps = [Item("trap", -10, "t")]
+
 # Used to collect the different items in lists into one place
-list_of_all = pickups + keys + chests
+list_of_all = pickups + keys + chests + traps
 
 
 def randomize(grid):
