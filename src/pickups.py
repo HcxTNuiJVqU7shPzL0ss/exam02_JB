@@ -20,9 +20,15 @@ class Item:
         return self.symbol
 
 
-# Used to randomize fruits and veggies for point pickups
+# Used to randomize OG fruits and veggies for point pickups
 pickups = [Item("carrot"), Item("apple"), Item("strawberry"), Item("cherry"),
            Item("watermelon"), Item("radish"), Item("cucumber"), Item("meatball")]
+
+# Copy of just the names to use as exit, did not find a good way to
+# grab them, too many hours spent, this is ugly, but it works
+exit_list = ["carrot", "apple", "strawberry", "cherry",
+           "watermelon", "radish", "cucumber", "meatball"]
+
 
 # Used to randomize key(s) on the grid
 keys = [Item("key", 0, "k")]
@@ -33,8 +39,16 @@ chests = [Item("chest", 100, "c")]
 # Used to randomize one trap on the grid
 traps = [Item("trap", -10, "t")]
 
+# Used to exit if all items in "pickups" has been harvested
+exit_strategy = [Item("exit", 0, "E")]
+
+
 # Used to collect the different items in lists into one place
-list_of_all = pickups + keys + chests + traps
+list_of_all = pickups + keys + chests + traps + exit_strategy
+
+
+# Used for fertile addons
+pickups_fertile = [Item("mango"), Item("lime"), Item("orange")]
 
 
 def randomize(grid):
@@ -46,7 +60,8 @@ def randomize(grid):
             y = grid.get_random_y()
             if grid.is_empty(x, y):
                 grid.set(x, y, item)
-                break  # avbryt while-loopen, fortsätt med nästa varv i for-loopen
+                # abort while loop, continue with next iteration of for loop
+                break
     # # Pickup "points" items
     # for item in pickups:
     #     while True:
@@ -79,7 +94,7 @@ def fertile_generate(grid):
         x = grid.get_random_x()
         y = grid.get_random_y()
         if grid.is_empty(x, y):
-            new_fruit = random.choice(pickups)
+            new_fruit = random.choice(pickups_fertile)
             grid.set(x, y, new_fruit)
             print(f"New item has been added to x:{x}, y:{y}!")
             break

@@ -62,6 +62,7 @@ while not command.casefold() in exit_commands:
         maybe_item = g.get(player.pos_x + coords[0], player.pos_y + coords[1])
         player.move(coords[0], coords[1])
         clear = True
+        all_done = False
 
         # After 25 moves, generate a new fruit/veggie
         if fertile_moves == 24:
@@ -90,6 +91,15 @@ while not command.casefold() in exit_commands:
                 else:
                     score = 0
                 clear = False
+            # Exit
+            elif maybe_item.name == "exit":
+                clear = False
+                if len(pickups.exit_list) != 0:
+                    str_print = ("You have not yet picked up all OG items!")
+                    all_done = False
+                else:
+                    all_done = True
+                    str_print = ("Way to go!")
             # Fruit / veggie
             elif maybe_item.value > 0:
                 score += maybe_item.value
@@ -102,6 +112,8 @@ while not command.casefold() in exit_commands:
             if clear:
                 g.clear(player.pos_x, player.pos_y)
                 inventory.append(maybe_item.name)
+                if maybe_item.name in pickups.exit_list:
+                    pickups.exit_list.remove(maybe_item.name)
         else:
             # Do not subtract points if attempting to move through a wall
             if coords[0] == 0 and coords[1] == 0:
@@ -123,6 +135,9 @@ while not command.casefold() in exit_commands:
             for item in inventory:
                 print(item)
             input("Press Enter to continue!")
+
+    if all_done:
+        break
 
 
 # This is where we end up when the while loop ends
