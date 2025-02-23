@@ -59,14 +59,32 @@ while not command.casefold() in exit_commands:
 
         maybe_item = g.get(player.pos_x + coords[0], player.pos_y + coords[1])
         player.move(coords[0], coords[1])
+        clear = True
 
         if isinstance(maybe_item, pickups.Item):
             # we found something
-            score += maybe_item.value
-            print(f"You found a {maybe_item.name}, +{maybe_item.value} points.")
+            # Chest
+            if maybe_item.name == "chest":
+                if "key" in inventory:
+                    score += maybe_item.value
+                    str_print = (f"You found a {maybe_item.name}, +{maybe_item.value} points. "
+                                 f"One key has been used and is now consumed.")
+                    inventory.remove("key")
+                else:
+                    str_print = (f"You found a {maybe_item.name}, but you had no key.")
+                    clear = False
+            # Fruit / veggie
+            elif maybe_item.value > 0:
+                score += maybe_item.value
+                str_print = f"You found a {maybe_item.name}, +{maybe_item.value} points."
+            # Key
+            else:
+                str_print = f"You found a {maybe_item.name}!"
+            print(str_print)
             #g.set(player.pos_x, player.pos_y, g.empty)
-            g.clear(player.pos_x, player.pos_y)
-            inventory.append(maybe_item.name)
+            if clear:
+                g.clear(player.pos_x, player.pos_y)
+                inventory.append(maybe_item.name)
         else:
             # Do not subtract points if attempting to move through a wall
             if coords[0] == 0 and coords[1] == 0:
