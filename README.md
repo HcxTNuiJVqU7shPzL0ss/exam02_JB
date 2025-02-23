@@ -10,6 +10,16 @@ Student == Jan Berglund
 python -m src.game
 ```
 
-## Handled input
-Version 1: A through H
-Version 2: K
+## Handled input / features
+* Version 1:
+    * A
+    * B
+    * C
+    * D
+    * E
+    * F
+    * G
+    * H
+* Version 2:
+    * K
+
