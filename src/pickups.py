@@ -6,6 +6,9 @@
 #####################################################################
 
 
+import random
+
+
 class Item:
     """Representerar saker man kan plocka upp."""
     def __init__(self, name, value=20, symbol="?"):
@@ -69,3 +72,15 @@ def randomize(grid):
     #         if grid.is_empty(x, y):
     #             grid.set(x, y, content)
     #             break  # abort while loop, continue next in for loop
+
+
+def fertile_generate(grid):
+    while True:
+        x = grid.get_random_x()
+        y = grid.get_random_y()
+        if grid.is_empty(x, y):
+            new_fruit = random.choice(pickups)
+            grid.set(x, y, new_fruit)
+            print(f"New item has been added to x:{x}, y:{y}!")
+            break
+

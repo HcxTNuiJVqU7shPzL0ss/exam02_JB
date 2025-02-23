@@ -23,4 +23,5 @@ python -m src.game
 * Version 2:
     * I
     * K
+    * L
 

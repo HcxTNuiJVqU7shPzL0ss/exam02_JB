@@ -11,7 +11,7 @@
 from . import pickups
 
 from .gamefunctions import *
-
+from .pickups import fertile_generate
 
 player = Player(18, 6)    # Set player start pos in middle
 score = 0                       # Starting score
@@ -33,6 +33,8 @@ exit_commands = ["q", "x"]
 
 command = "a"
 in_ok = True
+
+fertile_moves = 0
 
 
 # Check if to allow values below 0 when walking on lava
@@ -60,6 +62,13 @@ while not command.casefold() in exit_commands:
         maybe_item = g.get(player.pos_x + coords[0], player.pos_y + coords[1])
         player.move(coords[0], coords[1])
         clear = True
+
+        # After 25 moves, generate a new fruit/veggie
+        if fertile_moves == 24:
+            fertile_generate(g)
+            fertile_moves = 0
+        else:
+            fertile_moves += 1
 
         if isinstance(maybe_item, pickups.Item):
             # we found something
