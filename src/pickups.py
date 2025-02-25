@@ -24,10 +24,18 @@ class Item:
 pickups = [Item("carrot"), Item("apple"), Item("strawberry"), Item("cherry"),
            Item("watermelon"), Item("radish"), Item("cucumber"), Item("meatball")]
 
+def fill_exit_list():
+    exit_list = []
+    for item in range(0, len(pickups)):
+        exit_list.append(pickups[item].name)
+    return exit_list
+    # test = pickups[0].name
+    # print(test)
+
 # Copy of just the names to use as exit, did not find a good way to
 # grab them, too many hours spent, this is ugly, but it works
-exit_list = ["carrot", "apple", "strawberry", "cherry",
-           "watermelon", "radish", "cucumber", "meatball"]
+# exit_list = ["carrot", "apple", "strawberry", "cherry",
+#            "watermelon", "radish", "cucumber", "meatball"]
 
 
 # Used to randomize key(s) on the grid

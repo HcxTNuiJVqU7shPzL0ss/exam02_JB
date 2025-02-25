@@ -11,7 +11,7 @@
 from . import pickups
 
 from .gamefunctions import *
-from .pickups import fertile_generate
+from .pickups import fertile_generate, fill_exit_list
 
 player = Player(18, 6)    # Set player start pos in middle
 score = 0                       # Starting score
@@ -35,6 +35,8 @@ command = "a"
 in_ok = True
 
 fertile_moves = 0
+
+check_pickups = fill_exit_list()
 
 
 # Check if to allow values below 0 when walking on lava
@@ -94,12 +96,22 @@ while not command.casefold() in exit_commands:
             # Exit
             elif maybe_item.name == "exit":
                 clear = False
-                if len(pickups.exit_list) != 0:
-                    str_print = ("You have not yet picked up all OG items!")
-                    all_done = False
-                else:
-                    all_done = True
-                    str_print = ("Way to go!")
+                for check_item in check_pickups:
+                    if check_item not in inventory:
+                        print(check_item)
+                        print(inventory)
+                        str_print = ("You have not yet picked up all OG items!")
+                        all_done = False
+                        break
+                    else:
+                        all_done = True
+                        str_print = ("Way to go!")
+                # if len(pickups.exit_list) != 0:
+                #     str_print = ("You have not yet picked up all OG items!")
+                #     all_done = False
+                # else:
+                #     all_done = True
+                #     str_print = ("Way to go!")
             # Fruit / veggie
             elif maybe_item.value > 0:
                 score += maybe_item.value
@@ -112,8 +124,8 @@ while not command.casefold() in exit_commands:
             if clear:
                 g.clear(player.pos_x, player.pos_y)
                 inventory.append(maybe_item.name)
-                if maybe_item.name in pickups.exit_list:
-                    pickups.exit_list.remove(maybe_item.name)
+                # if maybe_item.name in pickups.exit_list:
+                #     pickups.exit_list.remove(maybe_item.name)
         else:
             # Do not subtract points if attempting to move through a wall
             if coords[0] == 0 and coords[1] == 0:
