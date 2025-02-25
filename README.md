@@ -24,5 +24,5 @@ python -m src.game
     * I
     * K
     * L
-    * M (sort of)
+    * M
 
