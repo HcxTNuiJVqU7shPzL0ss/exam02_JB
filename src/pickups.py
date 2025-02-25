@@ -8,6 +8,8 @@
 
 import random
 
+from src.gamefunctions import hit_it
+
 
 class Item:
     """Representerar saker man kan plocka upp."""
@@ -56,7 +58,9 @@ list_of_all = pickups + keys + chests + traps + exit_strategy
 
 
 # Used for fertile addons
-pickups_fertile = [Item("mango"), Item("lime"), Item("orange")]
+pickups_fertile = [Item("mango", 25, "*"),
+                   Item("lime", 25, "*"),
+                   Item("orange", 25, "*")]
 
 
 def randomize(grid):
@@ -105,5 +109,6 @@ def fertile_generate(grid):
             new_fruit = random.choice(pickups_fertile)
             grid.set(x, y, new_fruit)
             print(f"New item has been added to x:{x}, y:{y}!")
+            hit_it()
             break
 

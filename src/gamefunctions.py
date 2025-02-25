@@ -58,3 +58,8 @@ def lava_negative():
                 return True
             else:
                 return False
+
+
+def hit_it():
+    input("Press Enter to continue!")
+
