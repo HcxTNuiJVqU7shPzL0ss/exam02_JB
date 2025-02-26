@@ -25,34 +25,41 @@ g.make_extra_walls()
 pickups.randomize(g)
 
 
-# List of acceptable commands, not including q, x, i
+# List of acceptable commands, not including q, x, i, h
 player_commands = ["a", "s", "d", "w"]
 
 # List of exit commands
 exit_commands = ["q", "x"]
 
-
+# Default values
 command = "a"
 in_ok = True
 all_done = False
-
 fertile_moves = 0
-
 check_pickups = fill_exit_list()
 
 
 # Check if to allow values below 0 when walking on lava
-neg_values = lava_negative()
+# Also use this function to print start information to the
+# user (help)
+neg_values = start_info(True)
 
 
 # Loop until user/player inputs X or Q
 while not command.casefold() in exit_commands:
+    str_print = ""
     if in_ok:
         print_status(g, score)
 
-    command = input("Use WASD to move, I for inventory, "
-                    "Q/X to quit, only one char (Enter after input): \n")
-    if len(command) != 1:
+    command = input("Enter your command, only one char "
+                    "(Enter after input): \n")
+    # Secret stuff!!
+    secret = check_secret(command)
+    if secret:
+        score += 42
+        hit_it()
+        continue
+    elif len(command) != 1:
         print("Please only type one character")
         in_ok = False
         continue
@@ -94,12 +101,12 @@ while not command.casefold() in exit_commands:
                 clear = False
                 for check_item in check_pickups:
                     if check_item not in inventory:
-                        str_print = ("You have not yet picked up all OG items!")
+                        str_print = "You have not yet picked up all OG items!"
                         all_done = False
                         break
                     else:
                         all_done = True
-                        str_print = (f"Way to go! You got score of: {score}!")
+                        str_print = f"Way to go! You got score of: {score}!"
             # Fruit / veggie / etc.
             elif maybe_item.value > 0:
                 score += maybe_item.value
@@ -135,9 +142,21 @@ while not command.casefold() in exit_commands:
                 print(item)
             hit_it()
 
+    # Handle "help" printout
+    elif command == "h":
+        start_info(False)
+
+    # Not recognized command
+    elif command not in exit_commands:
+        print("I do not know that command, please "
+              "try again!")
+        hit_it()
+
     if all_done:
         break
 
 
 # This is where we end up when the while loop ends
-print("Thank you for playing!")
+# i.e. when the user selected either q or x
+print("\nThank you for playing, come again soon!\n"
+      "***** Please rate us 5 star! *****\n")
