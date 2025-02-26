@@ -83,45 +83,23 @@ while not command.casefold() in exit_commands:
                 score = result_chest[0]
                 str_print = result_chest[1]
                 clear = result_chest[2]
-                # if "key" in inventory:
-                #     score += maybe_item.value
-                #     str_print = (f"You found a {maybe_item.name}, +{maybe_item.value} points. "
-                #                  f"One key has been used and is now consumed.")
-                #     inventory.remove("key")
-                # else:
-                #     str_print = (f"You found a {maybe_item.name}, but you had no key.")
-                #     clear = False
             # Trap
             elif maybe_item.name == "trap":
                 result_trap = fun_trap(score, maybe_item, neg_values)
                 clear = False
                 score = result_trap[0]
                 str_print = result_trap[1]
-                # str_print = (f"Oh no, it is a {maybe_item.name}!")
-                # if score >= 10 or neg_values:
-                #     score += maybe_item.value
-                # else:
-                #     score = 0
-                # clear = False
             # Exit
             elif maybe_item.name == "exit":
                 clear = False
                 for check_item in check_pickups:
                     if check_item not in inventory:
-                        # print(check_item)
-                        # print(inventory)
                         str_print = ("You have not yet picked up all OG items!")
                         all_done = False
                         break
                     else:
                         all_done = True
                         str_print = (f"Way to go! You got score of: {score}!")
-                # if len(pickups.exit_list) != 0:
-                #     str_print = ("You have not yet picked up all OG items!")
-                #     all_done = False
-                # else:
-                #     all_done = True
-                #     str_print = ("Way to go!")
             # Fruit / veggie / etc.
             elif maybe_item.value > 0:
                 score += maybe_item.value
@@ -130,12 +108,9 @@ while not command.casefold() in exit_commands:
             else:
                 str_print = f"You found a {maybe_item.name}!"
             print(str_print)
-                        #g.set(player.pos_x, player.pos_y, g.empty)
             if clear:
                 g.clear(player.pos_x, player.pos_y)
                 inventory.append(maybe_item.name)
-                # if maybe_item.name in pickups.exit_list:
-                #     pickups.exit_list.remove(maybe_item.name)
 
             hit_it()
         else:

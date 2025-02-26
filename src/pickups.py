@@ -31,13 +31,6 @@ def fill_exit_list():
     for item in range(0, len(pickups)):
         exit_list.append(pickups[item].name)
     return exit_list
-    # test = pickups[0].name
-    # print(test)
-
-# Copy of just the names to use as exit, did not find a good way to
-# grab them, too many hours spent, this is ugly, but it works
-# exit_list = ["carrot", "apple", "strawberry", "cherry",
-#            "watermelon", "radish", "cucumber", "meatball"]
 
 
 # Used to randomize key(s) on the grid
@@ -74,31 +67,6 @@ def randomize(grid):
                 grid.set(x, y, item)
                 # abort while loop, continue with next iteration of for loop
                 break
-    # # Pickup "points" items
-    # for item in pickups:
-    #     while True:
-    #         # slumpa en position tills vi hittar en som är ledig
-    #         x = grid.get_random_x()
-    #         y = grid.get_random_y()
-    #         if grid.is_empty(x, y):
-    #             grid.set(x, y, item)
-    #             break  # avbryt while-loopen, fortsätt med nästa varv i for-loopen
-    # # Pickup "keys)"
-    # for content in keys:
-    #     while True:
-    #         x = grid.get_random_x()
-    #         y = grid.get_random_y()
-    #         if grid.is_empty(x, y):
-    #             grid.set(x, y, content)
-    #             break  # abort while loop, continue next in for loop
-    # # Pickup "chests)"
-    # for content in chests:
-    #     while True:
-    #         x = grid.get_random_x()
-    #         y = grid.get_random_y()
-    #         if grid.is_empty(x, y):
-    #             grid.set(x, y, content)
-    #             break  # abort while loop, continue next in for loop
 
 
 def fertile_generate(grid):
