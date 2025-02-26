@@ -25,4 +25,5 @@ python -m src.game
     * K
     * L
     * M
+    * O
 

@@ -35,7 +35,8 @@ exit_commands = ["q", "x"]
 command = "a"
 in_ok = True
 all_done = False
-fertile_moves = 0
+fertile_moves = 0 # Used to grow new things
+grace_moves = 0 # Used for grace period
 check_pickups = fill_exit_list()
 
 
@@ -90,6 +91,7 @@ while not command.casefold() in exit_commands:
                 score = result_chest[0]
                 str_print = result_chest[1]
                 clear = result_chest[2]
+                grace_moves = 5
             # Trap
             elif maybe_item.name == "trap":
                 result_trap = fun_trap(score, maybe_item, neg_values)
@@ -111,9 +113,12 @@ while not command.casefold() in exit_commands:
             elif maybe_item.value > 0:
                 score += maybe_item.value
                 str_print = f"You found a {maybe_item.name}, +{maybe_item.value} points."
+                grace_moves = 5
             # Key
             else:
                 str_print = f"You found a {maybe_item.name}!"
+                grace_moves = 5
+
             print(str_print)
             if clear:
                 g.clear(player.pos_x, player.pos_y)
@@ -125,11 +130,17 @@ while not command.casefold() in exit_commands:
             if coords[0] == 0 and coords[1] == 0:
                 continue
 
-            if score > 0:
-                score -= 1
+            # If there are grace moves left, decrease it
+            # Else check if to decrease score due to lava
+            if grace_moves > 0:
+                grace_moves -= 1
+                print(f"Free moves left: {grace_moves}")
             else:
-                if neg_values:
+                if score > 0:
                     score -= 1
+                else:
+                    if neg_values:
+                        score -= 1
 
     # Handle inventory printout
     elif command == "i":
