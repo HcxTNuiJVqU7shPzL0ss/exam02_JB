@@ -26,22 +26,22 @@ class Grid:
 
 
     def get(self, x, y):
-        """Hämta det som finns på en viss position"""
+        """Get what is available on a certain position"""
         return self.data[y][x]
 
     def set(self, x, y, value):
-        """Ändra vad som finns på en viss position"""
+        """Change what is available in one position"""
         self.data[y][x] = value
 
     def set_player(self, player):
         self.player = player
 
     def clear(self, x, y):
-        """Ta bort item från position"""
+        """Reove item from position"""
         self.set(x, y, self.empty)
 
     def __str__(self):
-        """Gör så att vi kan skriva ut spelplanen med print(grid)"""
+        """Facilitate that the game plan (grid) can be printed"""
         xs = ""
         for y in range(len(self.data)):
             row = self.data[y]
@@ -55,7 +55,7 @@ class Grid:
 
 
     def make_walls(self):
-        """Skapa väggar runt hela spelplanen"""
+        """Create the walls around the entire game plan"""
         for i in range(self.height):
             self.set(0, i, self.wall)
             self.set(self.width - 1, i, self.wall)
@@ -80,15 +80,15 @@ class Grid:
 
     # Används i filen pickups.py
     def get_random_x(self):
-        """Slumpa en x-position på spelplanen"""
+        """Randomize an x-position on the grid"""
         return random.randint(0, self.width-1)
 
     def get_random_y(self):
-        """Slumpa en y-position på spelplanen"""
+        """Randomize a y-position on the grid"""
         return random.randint(0, self.height-1)
 
 
     def is_empty(self, x, y):
-        """Returnerar True om det inte finns något på aktuell ruta"""
+        """Returns True if there is nothing on the specific spot in the grid"""
         return self.get(x, y) == self.empty
 

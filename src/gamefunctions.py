@@ -16,7 +16,7 @@ from .player import Player
 
 # Function to print the status (score) and game board
 def print_status(game_grid, score):
-    """Visa spelvärlden och antal poäng."""
+    """Display the board grid and number of points"""
     print("--------------------------------------")
     print(f"You have {score} points.")
     print(game_grid)

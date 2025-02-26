@@ -15,9 +15,9 @@ class Player:
 
     # Move the player, "dx" and "dy" is the difference
     def move(self, dx, dy):
-        """Flyttar spelaren.\n
-        dx = horisontell förflyttning, från vänster till höger\n
-        dy = vertikal förflyttning, uppifrån och ned"""
+        """Moves the player.\n
+        dx = horizontal movement, from left to right\n
+        dy = vertical movement, from up to down"""
         self.pos_x += dx
         self.pos_y += dy
 
