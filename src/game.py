@@ -14,6 +14,7 @@ from .gamefunctions import *
 from .item_check import fun_chest, fun_trap
 from .pickups import fertile_generate, fill_exit_list
 
+
 player = Player(18, 6)    # Set player start pos in middle
 score = 0                       # Starting score
 inventory = []                  # Empty inventory at start

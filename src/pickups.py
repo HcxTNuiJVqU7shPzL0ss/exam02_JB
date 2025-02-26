@@ -26,6 +26,9 @@ class Item:
 pickups = [Item("carrot"), Item("apple"), Item("strawberry"), Item("cherry"),
            Item("watermelon"), Item("radish"), Item("cucumber"), Item("meatball")]
 
+
+# Used to check if all OG items are picked up when
+# crossing "E" (Exit) on the grid
 def fill_exit_list():
     exit_list = []
     for item in range(0, len(pickups)):

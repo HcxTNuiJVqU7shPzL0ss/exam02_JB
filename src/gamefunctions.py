@@ -44,11 +44,11 @@ def handle_commands(command_in, player_in, g_in):
 
     if command_in == "d":  # move right
         x = 1
-    elif command_in == "a":
+    elif command_in == "a": # move left
         x = -1
-    elif command_in == "w":
+    elif command_in == "w": # move up
         y = -1
-    elif command_in == "s":
+    elif command_in == "s": # move down
         y = 1
 
     # Check if allowed to move, or a wall
@@ -79,6 +79,8 @@ def hit_it():
     input("Press Enter to continue!")
 
 
+# It is a secret after all!
+# Those who knows, knows!
 def check_secret(command):
     if command == "42":
         print("You found it!")

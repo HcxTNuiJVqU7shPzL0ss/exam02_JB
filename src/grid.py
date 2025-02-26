@@ -8,6 +8,7 @@
 
 import random
 
+
 class Grid:
     """"Represents the game board grid setup.
     It is OK to change the symbols for different squares."""
@@ -15,6 +16,7 @@ class Grid:
     height = 13
     empty = "."  # Symbol for an empty square
     wall = "■"   # Symbol for a (normally impenetrable) wall
+
 
     def __init__(self):
         """Create an object of the class Grid"""
@@ -82,6 +84,7 @@ class Grid:
     def get_random_x(self):
         """Randomize an x-position on the grid"""
         return random.randint(0, self.width-1)
+
 
     def get_random_y(self):
         """Randomize a y-position on the grid"""
